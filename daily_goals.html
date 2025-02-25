@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen - Daily Goal Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://img.freepik.com/free-vector/gradient-our-mission-concept-illustrated_23-2149081668.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            background-color: aquamarine;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .container {
+            align-self: center;
+            max-width: 400px;
+            width: 90%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #00aaff;
+            color: white;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        li {
+            background: #f3f3f3;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        li.completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .goal-date {
+            font-size: 0.8em;
+            color: #888;
+        }
+        .actions form {
+            display: inline;
+        }
+        .actions button {
+            margin: 2px 0;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .profile .description {
+            color: #fff;
+        }
+        .logout-button {
+        background-color: #ff5c5c;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-left: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #e04c4c;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            </div>
+        </div>
+        <ul>
+            <li><a href="/user/{{name}}">Home</a></li>
+            <li><a href="/user/{{name}}/about">About us</a></li>
+            <li><a href="/{{name}}/features">Resources</a></li>
+            <li><a href="/user/{{name}}/contact">Contact us</a></li>
+        </ul>
+        <a href="/logout" class="logout-button">Logout</a>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile">
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <center>
+    <div class="container">
+        <h2>Daily Goal Tracker</h2>
+        
+        <!-- Add Goal Form -->
+        <form action="" method="POST">
+            <input type="text" name="goalText" placeholder="Enter your goal..." required>
+            <button type="submit">Add Goal</button>
+        </form>
+        
+        <!-- List of Goals -->
+        <ul>
+            {% for goal in goals %}
+            <li class="{{ 'completed' if goal.status == 'Completed' else '' }}">
+                <span>{{ goal.goal }}</span>
+                <span class="goal-date">{{ goal.created_at.strftime('%Y-%m-%d') }}</span>
+                <div class="actions">
+                    <!-- Delete Goal -->
+                    <form action="{{ url_for('delete_goal', nme=name, id=goal.id) }}" method="get">
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <!-- Update Goal -->
+                    <form action="{{ url_for('update_goal', nme=name, id=goal.id) }}" method="post">
+                        <input type="text" name="goalText" placeholder="Edit goal..." required>
+                        <button type="submit">Update</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </center>
+</body>
+</html>

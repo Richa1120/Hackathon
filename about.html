@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen - About</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/previews/019/472/343/non_2x/wavy-green-pastel-background-free-vector.jpg') no-repeat center center fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            padding: 20px;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 750px;
+        }
+
+        .content h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .content p {
+            color: #555;
+        }
+
+        .get-started-btn {
+            background: #00aaff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .image-container {
+            margin-left: 30px;
+        }
+
+        .image-container img {
+            width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .profile .description {
+            color: #fff;
+        }
+        .logout-button {
+        background-color: #ff5c5c;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-left: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+        background-color: #e04c4c;
+    }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            </div>
+        </div>
+        <ul>
+            <li><a href="/user/{{name}}">Home</a></li>
+            <li><a href="/user/{{name}}/about">About us</a></li>
+            <li><a href="/{{name}}/features">Resources</a></li>
+            <li><a href="/user/{{name}}/contact">Contact us</a></li>
+        </ul>
+        <a href="/logout" class="logout-button">Logout</a>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile">
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <div class="container">
+        <div class="content">
+            <h4>Empowering Mental Wellness Through Innovation</h4>
+            <p>At AlmaZen, we are dedicated to transforming mental health support by
+                integrating technology, expert guidance, and personalized wellness tools.
+                Our platform is designed to help individuals manage their mental well-being effectively, providing a holistic approach to self-care.</p>
+                
+                <h4>Our Mission</h4>
+                <p>We aim to make mental health care more accessible, engaging, and proactive.
+                By combining evidence-based strategies with interactive features,
+                we empower users to take control of their mental well-being in a way that fits their lifestyle.</p>
+                
+                <h4>What We Offer</h4>
+                <p>Our platform provides a comprehensive suite of tools to support emotional and mental well-being, including:
+                
+                <br>✔ Real-Time Notifications – Reminders and motivational messages to keep you on track.
+                <br>✔ Doodle Page – A creative space to express emotions and relieve stress through art.
+                <br>✔ Email Reports – Regular insights into your progress for self-reflection and improvement.
+                <br>✔ Music Therapy – Curated playlists to help manage emotions, focus, and relaxation.
+                <br>✔ Daily Goal Setting – Tools to build positive habits and achieve personal milestones.
+                <br>✔ Videos & Games – Engaging content to educate, inspire, and improve mental well-being.
+                </p>
+                <h4>Our Commitment</h4>
+                <p>We believe that mental health support should be engaging, proactive, and personalized.
+                Whether you're looking to reduce stress, boost your mood, or develop a healthier routine,
+                our platform offers the tools and resources to guide you every step of the way.
+                
+                Together, we can build a healthier mind and a happier life.
+                </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen - Journal</title>
+    <style>
+        body {
+            background-image: url('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQCwDgeWuLqBLauUjD-tOXBZ62jMzwQ-FwM8JxqZ3QL9Z7TYe62');
+            background-size: cover;
+            background-color: #cce7f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .header {
+            color: white;
+            padding: 30px;
+        }
+
+        .entries {
+            margin: 20px;
+            color: white;
+        }
+
+        .entry {
+            background-color: #6cbac5;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px auto;
+            width: 80%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .entry textarea {
+            width: 90%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            resize: none;
+            background: #e0f7fa;
+        }
+
+        .entry textarea:focus {
+            outline: none;
+        }
+
+        .button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #005f73;
+        }
+
+        .logout-button {
+            background-color: #ff5c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #e04c4c;
+        }
+    </style>
+    <script>
+        function saveEntry() {
+    const entryData = {
+        smile: document.getElementById("smile").value.trim(),
+        dealing: document.getElementById("dealing").value.trim(),
+        thankful: document.getElementById("thankful").value.trim(),
+        forward: document.getElementById("forward").value.trim()
+    };
+
+    console.log("Sending data:", entryData);  // Debugging line
+
+    fetch("http://127.0.0.1:5000/journaling/save_entry", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entryData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(text => { throw new Error(text); });
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Success:", data);
+        alert("Entry saved successfully!");
+        location.reload();  // Reload the page to update entries
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Error: " + error.message);
+    });
+}
+
+
+function fetchEntries() {
+    let username = document.body.getAttribute("data-username"); // Get username
+    if (!username) {
+        console.error("Username not found in document.");
+        return;
+    }
+
+    let url = `/user/${username}/journaling`; // Construct URL dynamically
+    console.log("Fetching from URL:", url); // Debugging
+
+    fetch(url, {
+        headers: { "X-Requested-With": "XMLHttpRequest" } // Send special AJAX header
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Fetched Data:", data); // Debugging
+
+        let container = document.getElementById("pastEntries");
+        container.innerHTML = "<h2>Past Entries</h2>";
+
+        if (data.entries.length === 0) {
+            container.innerHTML += "<p>No journal entries found.</p>";
+            return;
+        }
+
+        data.entries.forEach(entry => {
+            container.innerHTML += `
+                <div class="entry" id="entry-${entry.id}">
+                    <h3>${entry.date}</h3>
+                    <p><strong>Smile:</strong> ${entry.smile}</p>
+                    <p><strong>Dealing with:</strong> ${entry.dealing}</p>
+                    <p><strong>Thankful for:</strong> ${entry.thankful}</p>
+                    <p><strong>Looking forward to:</strong> ${entry.forward}</p>
+                </div>`;
+        });
+    })
+    .catch(error => console.error('Error fetching entries:', error));
+}
+
+
+// Run fetchEntries when the page loads
+document.addEventListener("DOMContentLoaded", fetchEntries);
+</script>
+</head>
+
+<body data-username="{{ name }}">
+    <nav>
+        <div class="profile">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+        </div>
+        <ul>
+            <li><a href="/user/{{name}}">Home</a></li>
+            <li><a href="/user/{{name}}/about">About us</a></li>
+            <li><a href="/{{name}}/features">Resources</a></li>
+            <li><a href="/user/{{name}}/contact">Contact us</a></li>
+        </ul>
+        <a href="/logout" class="logout-button">Logout</a>
+        <div class="profile">
+            <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile">
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>Reflections of the Soul</h1>
+    </div>
+
+    <div class="entries">
+        <h2>Today's Entry</h2>
+        <div class="entry">
+            <h3>Something that made me smile today…</h3>
+            <textarea id="smile"></textarea>
+        </div>
+        <div class="entry">
+            <h3>Currently dealing with…</h3>
+            <textarea id="dealing"></textarea>
+        </div>
+        <div class="entry">
+            <h3>Thankful for…</h3>
+            <textarea id="thankful"></textarea>
+        </div>
+        <div class="entry">
+            <h3>Looking forward to…</h3>
+            <textarea id="forward"></textarea>
+        </div>
+        <button class="button" onclick="saveEntry()">Save Entry</button>
+    </div>
+
+    <div id="pastEntries"></div>
+</body>
+</html>

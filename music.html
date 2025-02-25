@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen - Music</title>
+    <style>
+        body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: url("https://media.istockphoto.com/id/2166905930/photo/green-candle-moss-and-stones-in-the-bark-of-a-tree-on-a-black-background.jpg?s=612x612&w=0&k=20&c=k5MwRiTVsad-fQe4s5c8BLU_VPZ2z5drhk0c54MDRCc=") no-repeat center center fixed;
+            color: white;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-size: cover;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+        .music-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+        }
+
+        .search-bar {
+            border: none;
+            outline: none;
+            padding: 5px;
+            width: 200px;
+        }
+
+        .banner {
+            padding: 50px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .album-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .album-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            text-align: center;
+            width: 120px;
+        }
+
+        .album-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto 5px auto;
+        }
+
+        .album-item:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .song-list {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: blue;
+            border-radius: 10px;
+        }
+
+        .song-item {
+            cursor: pointer;
+            padding: 5px;
+            transition: 0.3s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-style: bold;
+            font: size 10px;
+        }
+
+        .song-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .play-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout-button {
+            background-color: #ff5c5c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #e04c4c;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="profile">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+        </div>
+        <ul>
+            <li><a href="/user/{{name}}">Home</a></li>
+            <li><a href="/user/{{name}}/about">About us</a></li>
+            <li><a href="/{{name}}/features">Resources</a></li>
+            <li><a href="/user/{{name}}/contact">Contact us</a></li>
+        </ul>
+        <a href="/logout" class="logout-button">Logout</a>
+        <div class="profile">
+            <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile">
+        </div>
+    </nav>
+    <div class="music-container">
+        <header>
+            <div class="search-container">
+                <input type="text" placeholder="Search" class="search-bar" oninput="searchSongs()">
+                <button class="search-btn">🔍</button>
+            </div>
+        </header>
+        <div class="banner">
+            <h2>Relax. Recharge. Reflect</h2>
+        </div>
+        <section class="albums">
+            <h3>Albums</h3>
+            <div class="album-list">
+                <div class="album-item" onclick="showSongs('serenity')">
+                    <img src="https://static.toiimg.com/thumb/msid-106296420,imgsize-23950,width-400,resizemode-4/106296420.jpg" alt="Serenity">
+                    Serenity
+                </div>
+                <div class="album-item" onclick="showSongs('bloom')">
+                    <img src="https://static.toiimg.com/thumb/imgsize-47866,msid-110335274/110335274.jpg?width=500&resizemode=4" alt="Bloom">
+                    Bloom
+                </div>
+                <div class="album-item" onclick="showSongs('hush')">
+                    <img src="https://employeefanatix.com/wp-content/uploads/2016/01/keeping-secret-1024x938.jpg" alt="Hush">
+                    Hush
+                </div>
+                <div class="album-item" onclick="showSongs('solace')">
+                    <img src="https://img.freepik.com/premium-photo/magical-sunlight-orbs-sunbeams-through-tall-trees-rain-forest-lake-brunner_304583-618.jpg" alt="Solace">
+                    Solace
+                </div>
+                <div class="album-item" onclick="showSongs('glow')">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/038/000/255/small_2x/ai-generated-easy-to-add-lens-flare-effects-for-overlay-designs-or-screen-blending-mode-to-make-high-quality-images-abstract-sun-burst-digital-flare-iridescent-glare-over-black-background-photo.jpg" alt="Glow">
+                    Glow
+                </div>
+            </div>
+        </section>
+        
+        <div id="song-container" class="song-list"></div>
+    </div>
+
+    <script>
+        const albumSongs = {
+            serenity: [
+                { name: "Calm", link: "https://pixabay.com/music/meditationspiritual-calm-soul-meditation-247330/" },
+                { name: "Tranquil Breeze", link: "https://pixabay.com/music/ambient-evening-breeze-music-track-11611/" }
+            ],
+            bloom: [
+                { name: "Flourish", link: "https://pixabay.com/music/beats-bloom-267479/" },
+                { name: "Petals", link: "https://pixabay.com/music/ambient-flowers-bloom-135535/" }
+            ],
+            hush: [
+                { name: "Silent Night", link: "https://pixabay.com/music/christmas-silent-night-128573/" }
+            ],
+            solace: [
+                { name: "Peaceful Mind", link: "https://pixabay.com/music/meditationspiritual-peaceful-harmonies-259277/" }
+            ],
+            glow: [
+                { name: "Radiance", link: "https://pixabay.com/music/solo-piano-radiant-mindfulness-165866/" }
+            ]
+        };
+
+        function showSongs(album) {
+    const songContainer = document.getElementById("song-container");
+
+    // If the same album is clicked again, toggle visibility
+    if (songContainer.dataset.currentAlbum === album) {
+        songContainer.style.display = songContainer.style.display === "none" ? "block" : "none";
+        return;
+    }
+
+    // Update the current album
+    songContainer.dataset.currentAlbum = album;
+    
+    // Show new songs
+    songContainer.innerHTML = "";
+    albumSongs[album].forEach(song => {
+        const songDiv = document.createElement("div");
+        songDiv.classList.add("song-item");
+        songDiv.innerHTML = `${song.name} <button class='play-btn' onclick="window.open('${song.link}', '_blank')">▶</button>`;
+        songContainer.appendChild(songDiv);
+    });
+
+    songContainer.style.display = "block";
+}
+
+
+        function searchSongs() {
+    const query = document.querySelector(".search-bar").value.toLowerCase();
+    const songContainer = document.getElementById("song-container");
+    songContainer.innerHTML = "";
+    let foundSongs = [];
+
+    // Search through all albums for matching songs
+    Object.values(albumSongs).forEach(songs => {
+        foundSongs = foundSongs.concat(songs.filter(song => song.name.toLowerCase().includes(query)));
+    });
+
+    if (foundSongs.length > 0) {
+        foundSongs.forEach(song => {
+            const songDiv = document.createElement("div");
+            songDiv.classList.add("song-item");
+            songDiv.innerHTML = `${song.name} <button class='play-btn' onclick="window.open('${song.link}', '_blank')">▶</button>`;
+            songContainer.appendChild(songDiv);
+        });
+    } else {
+        // If no matching songs, display "Audio not available"
+        const noResultDiv = document.createElement("div");
+        noResultDiv.classList.add("song-item");
+        noResultDiv.style.textAlign = "center";
+        noResultDiv.style.fontWeight = "bold";
+        noResultDiv.innerText = "Audio not available";
+        songContainer.appendChild(noResultDiv);
+    }
+
+    // Show or hide the song container
+    songContainer.style.display = "block";
+}
+    </script>
+</body>
+</html>

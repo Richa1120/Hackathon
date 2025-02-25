@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen-Features</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/previews/019/472/343/non_2x/wavy-green-pastel-background-free-vector.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            padding: 20px;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .swiper {
+            width: 90%;         /* Increased width */
+            max-width: 800px;   /* Increased max width */
+            padding: 10px 0;
+        }
+
+        .swiper-slide {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;      /* More padding */
+            text-align: center;
+            height: 600px;      /* Increased height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;                /* Slide occupies full width */
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        .swiper-slide img {
+        width: 90%;
+        height: 300px;
+        margin-bottom: 10px;
+        border-radius: 0; /* Ensures no rounded corners */
+        object-fit: cover; /* Ensures the image fits well within the slide */
+        }
+
+
+        .swiper-slide h3 {
+            margin: 10px 0;
+        }
+
+        .swiper-slide p {
+            color: #555;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #00aaff;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .profile .description {
+            color: #fff;
+        }
+        .logout-button {
+        background-color: #ff5c5c;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-left: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+        background-color: #e04c4c;
+    }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            </div>
+        </div>
+        <ul>
+            <li><a href="/user/{{name}}">Home</a></li>
+            <li><a href="/user/{{name}}/about">About us</a></li>
+            <li><a href="/{{name}}/features">Resources</a></li>
+            <li><a href="/user/{{name}}/contact">Contact us</a></li>
+        </ul>
+        <a href="/logout" class="logout-button">Logout</a>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Explore Our Features</h1>
+        <!-- Swiper Container -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <a href="/user/{{name}}/games">
+                    <img src="{{ url_for('static', filename='images/games.jpg') }}" alt="Games"></a>
+                    <h3>Games</h3>
+                    <p>Fun and relaxing games to improve your mood.</p>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/user/{{name}}/music">
+                    <img src="{{ url_for('static', filename='images/music.jpg') }}" alt="Music"></a>
+                    <h3>Music</h3>
+                    <p>Therapeutic music to soothe your mind.</p>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/user/{{name}}/doodle">
+                    <img src="{{ url_for('static', filename='images/doodle.jpg') }}" alt="Doodle"></a>
+                    <h3>Doodle Page</h3>
+                    <p>Express yourself creatively through doodling.</p>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/user/{{name}}/daily_goals">
+                    <img src="{{ url_for('static', filename='images/goals.jpg') }}" alt="Goals"></a>
+                    <h3>Goal Setting</h3>
+                    <p>Track your daily goals and stay motivated.</p>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/user/{{name}}/videos">
+                    <img src="{{ url_for('static', filename='images/videos.jpg') }}" alt="Videos"></a>
+                    <h3>Videos</h3>
+                    <p>Watch inspirational and educational videos.</p>
+                </div>
+                <div class="swiper-slide">
+                    <a href="/user/{{name}}/journaling">
+                    <img src="{{ url_for('static', filename='images/journaling.jpg') }}" alt="Journaling"></a>
+                    <h3>Journaling</h3>
+                    <p>Reflect on your day with guided journaling.</p>
+                </div>
+            </div>
+            <!-- Add Pagination and Navigation -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,           // Show one slide at a time
+        spaceBetween: 2,            // No gap between slides
+        centeredSlides: true,      // Disable centered slides to avoid gaps
+        loop: true,                 // Enable infinite looping
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        });
+    </script>
+</body>
+</html>

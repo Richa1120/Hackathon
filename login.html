@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen - User Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://www.shutterstock.com/image-vector/illustration-landscape-mountain-range-blue-600nw-2472206103.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 700px;
+        }
+        
+
+        .logo-container img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .login-container {
+            flex: 1;
+            padding-left: 30px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            background-color: #3395B5;
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            margin: -20px -30px 20px -30px;
+        }
+
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container input[type="submit"] {
+            background-color: #2d87f0;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #C3E4EE;
+        }
+
+        .login-container a {
+            display: block;
+            margin-top: 10px;
+            color: #2d87f0;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <!-- Logo on the left -->
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="AlmaZen Logo">
+        </div>
+
+        <!-- Login Form on the right -->
+        <div class="login-container">
+            <h2>User Login</h2>
+            <form method="post">
+                Email
+                <input type="email" placeholder="Email" name="email" required>
+                Password
+                <input type="password" placeholder="Password" name="pass" required>
+                <input type="submit" value="Sign In">
+                <a href="/register">Don't have an account? Sign Up</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positive Affirmations</title>
+</head>
+<body>
+    <h1>Welcome to Your Mental Health Dashboard</h1>
+    
+    <button onclick="checkNotificationPermission()">Enable Notifications</button>
+    
+    <script>
+    // Check if the browser supports notifications
+    if ("Notification" in window) {
+        console.log("This browser supports notifications.");
+    } else {
+        alert("Your browser does not support notifications.");
+    }
+
+    // Request permission for notifications
+    function checkNotificationPermission() {
+      if (Notification.permission === "granted") {
+        showNotification();
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(function (permission) {
+          if (permission === "granted") {
+            showNotification();
+          }
+        });
+      }
+    }
+
+    // Function to fetch affirmation and show notification
+    function showNotification() {
+      fetch("http://localhost:5000/get-affirmation")
+        .then(response => response.json())
+        .then(data => {
+          const affirmation = data.affirmation;
+          new Notification("Positive Reminder 💖", {
+            body: affirmation,
+            icon: "https://via.placeholder.com/100" // optional icon
+          });
+        })
+        .catch(error => console.error("Error fetching affirmation:", error));
+    }
+
+    // Call the showNotification function at specific times (for example)
+    function scheduleNotifications() {
+      const times = [
+        { hour: 8, minute: 0 }, // Morning at 8:00 AM
+        { hour: 12, minute: 0 }, // Afternoon at 12:00 PM
+        { hour: 18, minute: 0 }, // Evening at 6:00 PM
+        { hour: 22, minute: 0 }  // Night at 10:00 PM
+      ];
+
+      times.forEach(time => {
+        const now = new Date();
+        const targetTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), time.hour, time.minute, 0, 0);
+        
+        if (targetTime <= now) {
+          targetTime.setDate(targetTime.getDate() + 1); // Set for the next day if the time has passed
+        }
+
+        const timeDifference = targetTime - now;
+        
+        setTimeout(function() {
+          showNotification(); // Show notification at the scheduled time
+        }, timeDifference);
+      });
+    }
+
+    // Start scheduling notifications when the page loads
+    window.onload = function() {
+      scheduleNotifications();
+    };
+  </script>
+</body>
+</html>

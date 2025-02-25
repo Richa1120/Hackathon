@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen - Games</title>
+    <style>
+        body {
+            background: url('https://static.vecteezy.com/system/resources/previews/026/733/911/original/fluid-background-gradient-gradient-abstract-background-purple-pink-shades-wavy-colored-lines-vibrant-colors-template-for-posters-advertising-banners-brochure-flyer-placard-websites-eps-vect-vector.jpg');
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            
+        }
+        .game-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 60px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .game-selection {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .game-icon {
+            background: #540570;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            text-align: center;
+        }
+        .game-icon:hover {
+            background-color: #1E40AF;
+        }
+        .game-description {
+            font-size: 16px;
+            max-width: 500px;
+            text-align: justify;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .profile .description {
+            color: #fff;
+        }
+        .logout-button {
+        background-color: #ff5c5c;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-left: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+        background-color: #e04c4c;
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            </div>
+        </div>
+        <ul>
+            <li><a href="/user/{{name}}">Home</a></li>
+            <li><a href="/user/{{name}}/about">About us</a></li>
+            <li><a href="/{{name}}/features">Resources</a></li>
+            <li><a href="/user/{{name}}/contact">Contact us</a></li>
+        </ul>
+        <a href="/logout" class="logout-button">Logout</a>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile">
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1> SERENE GAMES </h1>
+        <div class="game-box">
+            <p>Select a game to play:</p>
+            <div class="game-selection">
+                <a href="https://www.crazygames.com/game/block-puzzle" class="game-icon">
+                    <img src="https://imgs.crazygames.com/block-puzzle/20210105170856/block-puzzle-cover?metadata=none&quality=70&width=506" alt="Clickable Image" width="100" height="100">
+                </a>
+                <p class="game-description">why BLOCK PUZZLE ? - Dopamine, sometimes known as the "feel-good" brain chemical, is released by your brain each time you successfully put blocks together or finish a level. This constructive feedback can improve your general well-being while offering a relaxing distraction from stressful thoughts.</p>
+            </div>
+
+            <div class="game-selection">
+                <a href="https://colorwatersort.com/#play" class="game-icon">
+                    <img src="https://th.bing.com/th?q=Color+Water+Sort+Free+Online&w=80&h=80&c=7&o=5&dpr=1.3&pid=1.7&mkt=en-IN&cc=IN&setlang=en&adlt=moderate&t=1" alt="Clickable Image" width="100" height="100">
+                </a>
+                <p class="game-description">why play "WATER COLOR SORT" ? - Brain Training : Color water sorting puzzles are a great way to sharpen your logical thinking skills.</p>
+            </div>
+            
+            <div class="game-selection">
+                <a href="https://www.jspuzzles.com/" class="game-icon">
+                    <img src="https://www.jspuzzles.com/puzzlepic400/pic6-puzzle-2460624.webp " alt="Clickable Image" width="100" height="100">
+                </a>
+                <p class="game-description">Why "JIGSAW PUZZLE"? - puzzles provide a unique combination of positive benefits that extend beyond the completion of an assembled picture, acting as doors to a calm state of mind. By immersing yourself in the puzzle, you might start a path of transformation rather than just solving it.</p>
+            </div>
+            
+            <div class="game-selection">
+                <a href="https://www.arkadium.com/games/word-hunt/" class="game-icon">
+                    <img src="https://th.bing.com/th?id=OIP.Oi0ZKygQJ4cv64MO6RO4aAHaDa&w=80&h=80&c=1&vt=10&bgcl=020458&r=0&o=6&dpr=1.3&pid=5.1 " alt="Clickable Image" width="100" height="100">
+                </a>
+                <p class="game-description">why "WORD PUZZLE"? - Word games can be a therapeutic diversion for people who are depressed or anxious, providing them with moments of happiness and success.</p>
+            </div>
+        
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almazen - Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://static.vecteezy.com/system/resources/previews/019/472/343/non_2x/wavy-green-pastel-background-free-vector.jpg') no-repeat center center fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            padding: 20px;
+        }
+
+        .contact-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .contact-container:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-container h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-container p {
+            font-size: 18px;
+            color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(195, 228, 238, 0.2);
+            margin: 10px auto;
+            width: 90%;
+        }
+
+        .contact-container a {
+            text-decoration: none;
+            color: teal;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .contact-container a:hover {
+            text-decoration: underline;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        .profile .description {
+            color: #fff;
+        }
+        .logout-button {
+        background-color: #ff5c5c;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-left: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+        background-color: #e04c4c;
+    }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo">
+            </div>
+        </div>
+        <ul>
+            <li><a href="/user/{{name}}">Home</a></li>
+            <li><a href="/user/{{name}}/about">About us</a></li>
+            <li><a href="/{{name}}/features">Resources</a></li>
+            <li><a href="/user/{{name}}/contact">Contact us</a></li>
+        </ul>
+        <a href="/logout" class="logout-button">Logout</a>
+        <div class="profile">
+            <div class="profile img">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="contact-container">
+            <h2>Contact Us</h2>
+            <p><i class="bi bi-telephone-fill"></i> <a href="tel:+1234567890">+123-456-7890</a></p>
+            <p><i class="bi bi-envelope-fill"></i> <a href="mailto:contact@almazen.com">contact@almazen.com</a></p>
+            <p><i class="bi bi-instagram"></i> <a href="https://instagram.com/al">@almazen</a></p>
+        </div>
+    </div>
+</body>
+</html>

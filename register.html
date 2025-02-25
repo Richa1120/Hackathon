@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlmaZen - User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://www.shutterstock.com/image-vector/illustration-landscape-mountain-range-blue-600nw-2472206103.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .register-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 600px;
+        }
+
+        .logo-container img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .register-container {
+            flex: 1;
+            padding-left: 30px;
+            text-align: center;
+        }
+
+        .register-container h2 {
+            background-color: #2d87f0;
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            margin: -20px -30px 20px -30px;
+        }
+
+        .register-container input[type="text"],
+        .register-container input[type="email"],
+        .register-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .register-container input[type="submit"] {
+            background-color: #2d87f0;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .register-container input[type="submit"]:hover {
+            background-color: #256abf;
+        }
+
+        .register-container a {
+            display: block;
+            margin-top: 10px;
+            color: #2d87f0;
+            text-decoration: none;
+        }
+
+        .register-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-wrapper">
+        <!-- Logo on the left -->
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="AlmaZen Logo">
+        </div>
+
+        <!-- Registration Form on the right -->
+        <div class="register-container">
+            <h2>User Registration</h2>
+            <form action="/register" method="post">
+                <input type="text" placeholder="Full Name" name="username" required>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Password" name="password" required>
+                <input type="submit" value="Register">
+                <a href="/">Already have an account? Sign In</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
